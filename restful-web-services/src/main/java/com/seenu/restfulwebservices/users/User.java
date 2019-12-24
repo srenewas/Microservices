@@ -1,7 +1,12 @@
 package com.seenu.restfulwebservices.users;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -10,7 +15,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 // here ApiModel is the customizing User.class Description
 @ApiModel("*****ITS ALL ABOUT DESCRIPTION OF USER*****")
+// for database connection
+@Entity
 public class User {
+	
+	@Id
+	@GeneratedValue
 	private Integer id;
 	
 	//ApiModelProperty is only applicable for user variables only
@@ -22,6 +32,10 @@ public class User {
 	@ApiModelProperty(notes="puttina roju kaccchithanga mundhudai undali")
 	@Past
 	private Date date;
+	
+	// This is under Association(Post.class)
+	@OneToMany(mappedBy="user")
+	private List<Post> post;
 	
 	public User() {
 	}
